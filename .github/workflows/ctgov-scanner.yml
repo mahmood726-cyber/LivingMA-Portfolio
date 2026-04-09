@@ -1,0 +1,62 @@
+name: CT.gov Living Update Scanner
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday 8am UTC
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    outputs:
+      new_results: ${{ steps.scan.outputs.new_results }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run CT.gov scanner
+        id: scan
+        run: python scripts/ctgov_scanner.py
+        env:
+          ALERT_EMAIL: mahmood.ahmad2@nhs.net
+
+      - name: Send email if new results found
+        if: steps.scan.outputs.new_results == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Living MA Alert: New CT.gov Results Found — ${{ github.run_id }}"
+          to: mahmood.ahmad2@nhs.net
+          from: Living Evidence Scanner <livingma-scanner@gmail.com>
+          body: |
+            New trial results have been posted on ClinicalTrials.gov for one or more
+            of your 39 living meta-analysis topics.
+
+            Run date: ${{ github.run_id }}
+            Triggered by: ${{ github.event_name }}
+
+            The full report is attached. Please review and update the relevant
+            living meta-analyses on GitHub.
+
+            Workflow run:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          attachments: scan_report.md
+
+      - name: Upload scan report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ctgov-scan-report-${{ github.run_id }}
+          path: scan_report.md
+          retention-days: 90
