@@ -3,706 +3,371 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Living Evidence Portfolio — 32 transparent meta-analyses across 7 specialties. Every number traces to its source.">
-<meta property="og:title" content="Living Evidence Portfolio — Transparent Meta-Analyses">
-<meta property="og:description" content="32 living systematic reviews across 7 specialties. Every number traces to its source.">
+<meta name="description" content="Living Evidence Portfolio — 57 transparent meta-analyses across 12 specialties.">
+<meta property="og:title" content="Living Evidence Portfolio — 57 Transparent Meta-Analyses">
+<meta property="og:description" content="57 living systematic reviews. Every number traces to its source.">
 <meta property="og:type" content="website">
-<title>Living Evidence Portfolio — Transparent Meta-Analyses</title>
+<title>Living Evidence Portfolio — 57 Meta-Analyses</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
 <style>
-  /* ─── Reset & Base ─────────────────────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg:          #020617;
-    --surface:     #0f172a;
-    --surface2:    #1e293b;
-    --surface3:    #334155;
-    --text:        #f1f5f9;
-    --text-dim:    #94a3b8;
-    --text-muted:  #64748b;
-    --accent:      #3b82f6;
-    --accent-glow: rgba(59,130,246,0.25);
-
-    /* specialty colours */
-    --c-cardiology:         #3b82f6;
-    --c-oncology:           #f43f5e;
-    --c-pulmonology:        #06b6d4;
-    --c-neurology:          #8b5cf6;
-    --c-hepatology:         #f59e0b;
-    --c-nephrology:         #10b981;
-    --c-cardiometabolic:    #f97316;
-    --c-nma:                #6366f1;
-    --c-interventional:     #0ea5e9;
-    --c-peripheral-vascular:#ec4899;
-    --c-pulm-vascular:      #14b8a6;
-
-    --radius:  12px;
-    --radius-sm: 6px;
-    --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ─── Animated background grid ────────────────────────────────────── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ─── Header ───────────────────────────────────────────────────────── */
-  .header {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 64px 24px 48px;
-    background: linear-gradient(180deg, rgba(59,130,246,0.08) 0%, transparent 100%);
-    border-bottom: 1px solid rgba(59,130,246,0.12);
-  }
-
-  .header-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: rgba(59,130,246,0.1);
-    border: 1px solid rgba(59,130,246,0.2);
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin-bottom: 24px;
-  }
-
-  .header h1 {
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 16px;
-    line-height: 1.2;
-  }
-
-  .header-subtitle {
-    font-size: 1.05rem;
-    color: var(--text-dim);
-    max-width: 560px;
-    margin: 0 auto 40px;
-  }
-
-  /* ─── KPI Cards ────────────────────────────────────────────────────── */
-  .kpi-row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 8px;
-  }
-
-  .kpi-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    backdrop-filter: blur(12px);
-    border-radius: var(--radius);
-    padding: 20px 28px;
-    text-align: center;
-    min-width: 140px;
-    transition: border-color var(--transition), box-shadow var(--transition);
-  }
-  .kpi-card:hover {
-    border-color: rgba(59,130,246,0.35);
-    box-shadow: 0 0 24px rgba(59,130,246,0.12);
-  }
-
-  .kpi-value {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .kpi-label {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    font-weight: 600;
-  }
-
-  /* ─── Main container ───────────────────────────────────────────────── */
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
-
-  /* ─── Filter bar ───────────────────────────────────────────────────── */
-  .filter-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 36px;
-    align-items: center;
-  }
-
-  .filter-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    margin-right: 4px;
-    white-space: nowrap;
-  }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 100px;
-    border: 1px solid var(--surface3);
-    background: var(--surface);
-    color: var(--text-dim);
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition);
-    user-select: none;
-  }
-  .pill:hover {
-    border-color: var(--accent);
-    color: var(--text);
-  }
-  .pill.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-    box-shadow: 0 0 12px rgba(59,130,246,0.4);
-  }
-  .pill .pill-count {
-    font-size: 0.72rem;
-    opacity: 0.8;
-    background: rgba(255,255,255,0.12);
-    padding: 1px 6px;
-    border-radius: 100px;
-  }
-  .pill.active .pill-count {
-    background: rgba(255,255,255,0.22);
-  }
-
-  /* ─── Results count ────────────────────────────────────────────────── */
-  .results-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-  }
-  .results-info strong {
-    color: var(--text);
-  }
-  .results-line {
-    flex: 1;
-    height: 1px;
-    background: var(--surface2);
-  }
-
-  /* ─── App Grid ─────────────────────────────────────────────────────── */
-  .app-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 20px;
-  }
-
-  /* ─── App Card ─────────────────────────────────────────────────────── */
-  .app-card {
-    background: rgba(15,23,42,0.8);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius);
-    padding: 0;
-    overflow: hidden;
-    backdrop-filter: blur(8px);
-    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  .app-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
-  }
-
-  /* coloured left accent border */
-  .app-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--specialty-color, var(--accent));
-    border-radius: var(--radius) 0 0 var(--radius);
-  }
-
-  /* top glow on hover */
-  .app-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 3px;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, var(--specialty-color, var(--accent)), transparent);
-    opacity: 0;
-    transition: opacity var(--transition);
-  }
-  .app-card:hover::after { opacity: 0.6; }
-
-  .card-body {
-    padding: 20px 20px 16px 24px;
-    flex: 1;
-  }
-
-  .card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-
-  .card-title {
-    font-size: 1.02rem;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.3;
-  }
-
-  .specialty-badge {
-    flex-shrink: 0;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 3px 10px;
-    border-radius: 100px;
-    color: #fff;
-    background: var(--specialty-color, var(--accent));
-    opacity: 0.9;
-    white-space: nowrap;
-  }
-
-  .card-finding {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    margin-bottom: 14px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .card-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
-
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .meta-item i { opacity: 0.6; font-size: 0.75rem; }
-
-  .meta-highlight {
-    font-weight: 700;
-    color: var(--text-dim);
-  }
-
-  /* ─── Card footer buttons ──────────────────────────────────────────── */
-  .card-footer {
-    display: flex;
-    gap: 8px;
-    padding: 12px 20px 16px 24px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    border-radius: var(--radius-sm);
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    border: none;
-    transition: all var(--transition);
-    white-space: nowrap;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-    flex: 1;
-    justify-content: center;
-  }
-  .btn-primary:hover {
-    background: #2563eb;
-    box-shadow: 0 0 16px rgba(59,130,246,0.4);
-    transform: translateY(-1px);
-  }
-
-  .btn-secondary {
-    background: var(--surface2);
-    color: var(--text-dim);
-    border: 1px solid var(--surface3);
-  }
-  .btn-secondary:hover {
-    background: var(--surface3);
-    color: var(--text);
-    border-color: var(--text-muted);
-  }
-
-  /* ─── Empty state ──────────────────────────────────────────────────── */
-  .empty-state {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 64px 24px;
-    color: var(--text-muted);
-  }
-  .empty-state i { font-size: 2.5rem; margin-bottom: 16px; opacity: 0.3; }
-  .empty-state p { font-size: 1rem; }
-
-  /* ─── Footer ───────────────────────────────────────────────────────── */
-  .site-footer {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 32px 24px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    color: var(--text-muted);
-    font-size: 0.82rem;
-  }
-  .site-footer a { color: var(--accent); text-decoration: none; }
-  .site-footer a:hover { text-decoration: underline; }
-
-  /* ─── Specialty-color utility mapping ─────────────────────────────── */
-  [data-specialty="Cardiology"]          { --specialty-color: var(--c-cardiology); }
-  [data-specialty="Oncology"]            { --specialty-color: var(--c-oncology); }
-  [data-specialty="Pulmonology"]         { --specialty-color: var(--c-pulmonology); }
-  [data-specialty="Neurology"]           { --specialty-color: var(--c-neurology); }
-  [data-specialty="Hepatology"]          { --specialty-color: var(--c-hepatology); }
-  [data-specialty="Nephrology"]          { --specialty-color: var(--c-nephrology); }
-  [data-specialty="Cardiometabolic"]     { --specialty-color: var(--c-cardiometabolic); }
-  [data-specialty="NMA"]                 { --specialty-color: var(--c-nma); }
-  [data-specialty="Interventional"]      { --specialty-color: var(--c-interventional); }
-  [data-specialty="Peripheral Vascular"] { --specialty-color: var(--c-peripheral-vascular); }
-  [data-specialty="Pulm Vascular"]       { --specialty-color: var(--c-pulm-vascular); }
-
-  /* ─── Responsive tweaks ────────────────────────────────────────────── */
-  @media (max-width: 600px) {
-    .header { padding: 40px 16px 36px; }
-    .header h1 { font-size: 1.6rem; }
-    .kpi-card { min-width: 110px; padding: 16px 18px; }
-    .kpi-value { font-size: 1.8rem; }
-    .container { padding: 28px 12px 60px; }
-    .app-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ─── Scroll fade-in animation ─────────────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .app-card.visible {
-    animation: fadeUp 0.38s ease forwards;
-  }
-  .app-card { opacity: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#020617;color:#f1f5f9;font-family:system-ui,-apple-system,sans-serif;min-height:100vh;padding:40px 20px}
+.container{max-width:1200px;margin:0 auto}
+h1{font-size:28px;font-weight:800;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.subtitle{font-size:14px;color:#64748b;margin-bottom:32px}
+.stats{display:flex;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+.stat{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:16px 24px;text-align:center}
+.stat-num{font-size:28px;font-weight:800;color:#3b82f6}
+.stat-label{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;margin-top:4px}
+.pills{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.pill{background:#0f172a;border:1px solid #1e293b;border-radius:20px;padding:6px 16px;font-size:11px;font-weight:600;color:#94a3b8;cursor:pointer;transition:all 0.2s}
+.pill:hover,.pill.active{background:color-mix(in srgb,var(--pill-color) 15%,transparent);color:var(--pill-color);border-color:color-mix(in srgb,var(--pill-color) 30%,transparent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:20px;text-decoration:none;transition:all 0.2s;display:block}
+.card:hover{border-color:var(--card-accent);box-shadow:0 0 20px color-mix(in srgb,var(--card-accent) 15%,transparent);transform:translateY(-2px)}
+.card-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.dot{width:8px;height:8px;border-radius:50%}
+.spec-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em}
+.card h3{font-size:14px;font-weight:700;color:#f1f5f9;margin-bottom:6px}
+.card-meta{font-size:11px;color:#64748b;margin-bottom:8px}
+.badges{display:flex;gap:4px;flex-wrap:wrap}
+.badge{padding:2px 8px;border-radius:8px;font-size:9px;font-weight:700}
+.badge-dr{background:rgba(244,63,94,0.15);color:#fb7185;border:1px solid rgba(244,63,94,0.3)}
+.badge-nma{background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3)}
+.hidden{display:none!important}
+footer{margin-top:48px;padding-top:24px;border-top:1px solid #1e293b;text-align:center;font-size:11px;color:#475569}
 </style>
 </head>
 <body>
-
-<!-- ─── HEADER ─────────────────────────────────────────────────────────────── -->
-<header class="header">
-  <div class="header-eyebrow">
-    <i class="fa-solid fa-circle-dot fa-beat" style="color:#22c55e;"></i>
-    Living Evidence Portfolio
+<div class="container">
+  <h1><i class="fa-solid fa-microscope" style="margin-right:8px"></i>Living Evidence Portfolio</h1>
+  <p class="subtitle">Mahmood Ahmad &middot; Tahir Heart Institute &middot; 57 living systematic reviews &middot; Every number traces to its source</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">57</div><div class="stat-label">Living MAs</div></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">Specialties</div></div>
+    <div class="stat"><div class="stat-num">766</div><div class="stat-label">Trials</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dose-Response</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">NMA</div></div>
   </div>
-  <h1>Living Evidence Portfolio<br>Transparent Meta-Analyses</h1>
-  <p class="header-subtitle">
-    32 living systematic reviews across 7 specialties.
-    Every number traces to its source.
-  </p>
+  <div class="pills">
+    <button class="pill active" style="--pill-color:#3b82f6" onclick="filterCards(this)" data-filter="all">All (57)</button>
+    <button class="pill" style="--pill-color:#3b82f6" onclick="filterCards(this)" data-filter="Cardiology">Cardiology (23)</button>
+    <button class="pill" style="--pill-color:#f97316" onclick="filterCards(this)" data-filter="Cardiometabolic">Cardiometabolic (5)</button>
+    <button class="pill" style="--pill-color:#a855f7" onclick="filterCards(this)" data-filter="Dermatology">Dermatology (1)</button>
+    <button class="pill" style="--pill-color:#f59e0b" onclick="filterCards(this)" data-filter="Hepatology">Hepatology (1)</button>
+    <button class="pill" style="--pill-color:#0ea5e9" onclick="filterCards(this)" data-filter="Interventional">Interventional (7)</button>
+    <button class="pill" style="--pill-color:#6366f1" onclick="filterCards(this)" data-filter="NMA">NMA (4)</button>
+    <button class="pill" style="--pill-color:#10b981" onclick="filterCards(this)" data-filter="Nephrology">Nephrology (5)</button>
+    <button class="pill" style="--pill-color:#8b5cf6" onclick="filterCards(this)" data-filter="Neurology">Neurology (1)</button>
+    <button class="pill" style="--pill-color:#f43f5e" onclick="filterCards(this)" data-filter="Oncology">Oncology (6)</button>
+    <button class="pill" style="--pill-color:#ec4899" onclick="filterCards(this)" data-filter="Peripheral Vascular">Peripheral Vascular (1)</button>
+    <button class="pill" style="--pill-color:#14b8a6" onclick="filterCards(this)" data-filter="Pulm Vascular">Pulm Vascular (1)</button>
+    <button class="pill" style="--pill-color:#06b6d4" onclick="filterCards(this)" data-filter="Pulmonology">Pulmonology (2)</button>
 
-  <div class="kpi-row">
-    <div class="kpi-card">
-      <div class="kpi-value">32</div>
-      <div class="kpi-label">Total Reviews</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-value">127</div>
-      <div class="kpi-label">Total Trials</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-value">7</div>
-      <div class="kpi-label">Specialties</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-value">~350</div>
-      <div class="kpi-label">Outcomes Tracked</div>
-    </div>
   </div>
-</header>
-
-<!-- ─── MAIN ────────────────────────────────────────────────────────────────── -->
-<main class="container">
-
-  <!-- Filter pills -->
-  <div class="filter-bar" id="filterBar" role="group" aria-label="Filter by specialty">
-    <span class="filter-label"><i class="fa-solid fa-filter"></i> Filter:</span>
+  <div class="grid" id="grid">
+    <a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/ATTR_CM_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>ATTR-CM Therapies Ultra-Precision</h3>
+      <div class="card-meta">15 trials &middot; 13,661 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/AntiAmyloid-AD-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Neurology" style="--card-accent:#8b5cf6">
+      <div class="card-header"><span class="dot" style="background:#8b5cf6"></span><span class="spec-label" style="color:#8b5cf6">Neurology</span></div>
+      <h3>Anti-Amyloid in Alzheimers</h3>
+      <div class="card-meta">14 trials &middot; 14,499 lines &middot; RR</div>
+      <div class="badges"><span class="badge badge-dr">DOSE-RESPONSE</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/Antiplatelet-NMA-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="NMA" style="--card-accent:#6366f1">
+      <div class="card-header"><span class="dot" style="background:#6366f1"></span><span class="spec-label" style="color:#6366f1">NMA</span></div>
+      <h3>Antiplatelet De-escalation NMA</h3>
+      <div class="card-meta">14 trials &middot; 14,252 lines &middot; HR</div>
+      <div class="badges"><span class="badge badge-nma">NMA</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/BEMPEDOIC_ACID_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Bempedoic Acid Ultra-Precision</h3>
+      <div class="card-meta">16 trials &middot; 13,805 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Bimekizumab-Pso-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Dermatology" style="--card-accent:#a855f7">
+      <div class="card-header"><span class="dot" style="background:#a855f7"></span><span class="spec-label" style="color:#a855f7">Dermatology</span></div>
+      <h3>Bimekizumab Psoriasis</h3>
+      <div class="card-meta">14 trials &middot; 14,545 lines &middot; RR</div>
+      <div class="badges"><span class="badge badge-dr">DOSE-RESPONSE</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/CTFFR-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Interventional" style="--card-accent:#0ea5e9">
+      <div class="card-header"><span class="dot" style="background:#0ea5e9"></span><span class="spec-label" style="color:#0ea5e9">Interventional</span></div>
+      <h3>CT-FFR Guided Strategy</h3>
+      <div class="card-meta">12 trials &middot; 14,437 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/ABLATION_AF_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Catheter Ablation for AF Ultra-Precision</h3>
+      <div class="card-meta">13 trials &middot; 13,651 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/COLCHICINE_CVD_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Colchicine Anti-Inflammatory CVD</h3>
+      <div class="card-meta">14 trials &middot; 11,108 lines &middot; OR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/CSP-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Interventional" style="--card-accent:#0ea5e9">
+      <div class="card-header"><span class="dot" style="background:#0ea5e9"></span><span class="spec-label" style="color:#0ea5e9">Interventional</span></div>
+      <h3>Conduction System Pacing</h3>
+      <div class="card-meta">14 trials &middot; 14,448 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Coronary-IVL-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Interventional" style="--card-accent:#0ea5e9">
+      <div class="card-header"><span class="dot" style="background:#0ea5e9"></span><span class="spec-label" style="color:#0ea5e9">Interventional</span></div>
+      <h3>Coronary IVL (Shockwave)</h3>
+      <div class="card-meta">14 trials &middot; 14,463 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/DOAC_CANCER_VTE_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>DOACs for Cancer-Associated VTE Ultra-Precision</h3>
+      <div class="card-meta">13 trials &middot; 13,651 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Dapa-AcuteHF-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Dapagliflozin in Acute HF</h3>
+      <div class="card-meta">12 trials &middot; 14,191 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/DCB-PAD-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Peripheral Vascular" style="--card-accent:#ec4899">
+      <div class="card-header"><span class="dot" style="background:#ec4899"></span><span class="spec-label" style="color:#ec4899">Peripheral Vascular</span></div>
+      <h3>Drug-Coated Balloons in PAD</h3>
+      <div class="card-meta">19 trials &middot; 14,472 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Dupilumab-COPD-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Pulmonology" style="--card-accent:#06b6d4">
+      <div class="card-header"><span class="dot" style="background:#06b6d4"></span><span class="spec-label" style="color:#06b6d4">Pulmonology</span></div>
+      <h3>Dupilumab in COPD</h3>
+      <div class="card-meta">9 trials &middot; 14,184 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Empa-MI-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Empagliflozin in Acute MI</h3>
+      <div class="card-meta">10 trials &middot; 14,439 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Enfortumab-UC-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Oncology" style="--card-accent:#f43f5e">
+      <div class="card-header"><span class="dot" style="background:#f43f5e"></span><span class="spec-label" style="color:#f43f5e">Oncology</span></div>
+      <h3>Enfortumab Vedotin UC</h3>
+      <div class="card-meta">8 trials &middot; 14,172 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/FINERENONE_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Finerenone Ultra-Precision</h3>
+      <div class="card-meta">12 trials &middot; 14,525 lines &middot; AUTO</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/GLP1_CVOT_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiometabolic" style="--card-accent:#f97316">
+      <div class="card-header"><span class="dot" style="background:#f97316"></span><span class="spec-label" style="color:#f97316">Cardiometabolic</span></div>
+      <h3>GLP-1 RA CVOT Ultra-Precision</h3>
+      <div class="card-meta">50 trials &middot; 14,902 lines &middot; OR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/HFrEF-NMA-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="NMA" style="--card-accent:#6366f1">
+      <div class="card-header"><span class="dot" style="background:#6366f1"></span><span class="spec-label" style="color:#6366f1">NMA</span></div>
+      <h3>HFrEF Quadruple Therapy NMA</h3>
+      <div class="card-meta">11 trials &middot; 14,240 lines &middot; HR</div>
+      <div class="badges"><span class="badge badge-nma">NMA</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/IV_IRON_HF_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>IV Iron in Heart Failure Ultra-Precision</h3>
+      <div class="card-meta">13 trials &middot; 13,650 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Icosapent-Ethyl-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Icosapent Ethyl (EPA) CV</h3>
+      <div class="card-meta">11 trials &middot; 14,448 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Inclisiran-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Inclisiran (siRNA PCSK9)</h3>
+      <div class="card-meta">14 trials &middot; 14,446 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/INCRETIN_HFpEF_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiometabolic" style="--card-accent:#f97316">
+      <div class="card-header"><span class="dot" style="background:#f97316"></span><span class="spec-label" style="color:#f97316">Cardiometabolic</span></div>
+      <h3>Incretin Therapies in HFpEF Ultra-Precision</h3>
+      <div class="card-meta">12 trials &middot; 13,651 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/INTENSIVE_BP_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Intensive BP Precision</h3>
+      <div class="card-meta">27 trials &middot; 13,533 lines &middot; AUTO</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Iptacopan-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Nephrology" style="--card-accent:#10b981">
+      <div class="card-header"><span class="dot" style="background:#10b981"></span><span class="spec-label" style="color:#10b981">Nephrology</span></div>
+      <h3>Iptacopan (Factor B Inhibitor)</h3>
+      <div class="card-meta">8 trials &middot; 14,163 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/KRAS-G12C-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Oncology" style="--card-accent:#f43f5e">
+      <div class="card-header"><span class="dot" style="background:#f43f5e"></span><span class="spec-label" style="color:#f43f5e">Oncology</span></div>
+      <h3>KRAS G12C Inhibitors NSCLC</h3>
+      <div class="card-meta">14 trials &middot; 14,203 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Leadless-Pacing-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Interventional" style="--card-accent:#0ea5e9">
+      <div class="card-header"><span class="dot" style="background:#0ea5e9"></span><span class="spec-label" style="color:#0ea5e9">Interventional</span></div>
+      <h3>Leadless Pacing</h3>
+      <div class="card-meta">17 trials &middot; 14,475 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/MAVACAMTEN_HCM_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Mavacamten for Obstructive HCM Ultra-Precision</h3>
+      <div class="card-meta">12 trials &middot; 13,645 lines &middot; AUTO</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Obesity-NMA-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="NMA" style="--card-accent:#6366f1">
+      <div class="card-header"><span class="dot" style="background:#6366f1"></span><span class="spec-label" style="color:#6366f1">NMA</span></div>
+      <h3>Obesity Pharmacotherapy NMA</h3>
+      <div class="card-meta">17 trials &middot; 14,576 lines &middot; RR</div>
+      <div class="badges"><span class="badge badge-dr">DOSE-RESPONSE</span> <span class="badge badge-nma">NMA</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/Omecamtiv-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Omecamtiv Mecarbil</h3>
+      <div class="card-meta">13 trials &middot; 14,448 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/LIPID_HUB_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Omega-3 &amp; Icosapent Ethyl CVD Prevention</h3>
+      <div class="card-meta">15 trials &middot; 13,749 lines &middot; AUTO</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Orforglipron-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiometabolic" style="--card-accent:#f97316">
+      <div class="card-header"><span class="dot" style="background:#f97316"></span><span class="spec-label" style="color:#f97316">Cardiometabolic</span></div>
+      <h3>Orforglipron (Oral GLP-1)</h3>
+      <div class="card-meta">20 trials &middot; 14,476 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Osimertinib-NSCLC-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Oncology" style="--card-accent:#f43f5e">
+      <div class="card-header"><span class="dot" style="background:#f43f5e"></span><span class="spec-label" style="color:#f43f5e">Oncology</span></div>
+      <h3>Osimertinib in EGFR+ NSCLC</h3>
+      <div class="card-meta">14 trials &middot; 14,466 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/PAH-NMA-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="NMA" style="--card-accent:#6366f1">
+      <div class="card-header"><span class="dot" style="background:#6366f1"></span><span class="spec-label" style="color:#6366f1">NMA</span></div>
+      <h3>PAH Therapies NMA</h3>
+      <div class="card-meta">14 trials &middot; 14,259 lines &middot; HR</div>
+      <div class="badges"><span class="badge badge-nma">NMA</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/PCSK9_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>PCSK9 Inhibitor Precision</h3>
+      <div class="card-meta">8 trials &middot; 13,605 lines &middot; AUTO</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/PFA-AF-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Interventional" style="--card-accent:#0ea5e9">
+      <div class="card-header"><span class="dot" style="background:#0ea5e9"></span><span class="spec-label" style="color:#0ea5e9">Interventional</span></div>
+      <h3>PFA in Atrial Fibrillation</h3>
+      <div class="card-meta">11 trials &middot; 14,432 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Pembro-Adj-Mel-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Oncology" style="--card-accent:#f43f5e">
+      <div class="card-header"><span class="dot" style="background:#f43f5e"></span><span class="spec-label" style="color:#f43f5e">Oncology</span></div>
+      <h3>Pembrolizumab Adj Melanoma</h3>
+      <div class="card-meta">7 trials &middot; 14,167 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/K-Binders-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Nephrology" style="--card-accent:#10b981">
+      <div class="card-header"><span class="dot" style="background:#10b981"></span><span class="spec-label" style="color:#10b981">Nephrology</span></div>
+      <h3>Potassium Binders (RAASi Enablement)</h3>
+      <div class="card-meta">17 trials &middot; 14,524 lines &middot; RR</div>
+      <div class="badges"><span class="badge badge-dr">DOSE-RESPONSE</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/RENAL_DENERV_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Renal Denervation for HTN Ultra-Precision</h3>
+      <div class="card-meta">12 trials &middot; 13,668 lines &middot; MD</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Resmetirom-MASH-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Hepatology" style="--card-accent:#f59e0b">
+      <div class="card-header"><span class="dot" style="background:#f59e0b"></span><span class="spec-label" style="color:#f59e0b">Hepatology</span></div>
+      <h3>Resmetirom for MASH</h3>
+      <div class="card-meta">11 trials &middot; 14,474 lines &middot; RR</div>
+      <div class="badges"><span class="badge badge-dr">DOSE-RESPONSE</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/RIVAROXABAN_VASC_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Rivaroxaban Vascular Protection Ultra-Precision</h3>
+      <div class="card-meta">13 trials &middot; 13,652 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/SGLT2_CKD_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Nephrology" style="--card-accent:#10b981">
+      <div class="card-header"><span class="dot" style="background:#10b981"></span><span class="spec-label" style="color:#10b981">Nephrology</span></div>
+      <h3>SGLT2 Inhibitors in CKD Ultra-Precision</h3>
+      <div class="card-meta">10 trials &middot; 13,641 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/SGLT2_HF_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>SGLT2-HF Ultra-Precision</h3>
+      <div class="card-meta">15 trials &middot; 11,192 lines &middot; OR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Sacituzumab-TNBC-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Oncology" style="--card-accent:#f43f5e">
+      <div class="card-header"><span class="dot" style="background:#f43f5e"></span><span class="spec-label" style="color:#f43f5e">Oncology</span></div>
+      <h3>Sacituzumab Govitecan Breast</h3>
+      <div class="card-meta">12 trials &middot; 14,193 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/rapidmeta-finerenone/ARNI_HF_REVIEW.html" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Sacubitril/Valsartan (ARNI) in HF Ultra-Precision</h3>
+      <div class="card-meta">12 trials &middot; 13,651 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Semaglutide-CKD-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Nephrology" style="--card-accent:#10b981">
+      <div class="card-header"><span class="dot" style="background:#10b981"></span><span class="spec-label" style="color:#10b981">Nephrology</span></div>
+      <h3>Semaglutide in CKD</h3>
+      <div class="card-meta">7 trials &middot; 14,432 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Semaglutide-HFpEF-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiometabolic" style="--card-accent:#f97316">
+      <div class="card-header"><span class="dot" style="background:#f97316"></span><span class="spec-label" style="color:#f97316">Cardiometabolic</span></div>
+      <h3>Semaglutide in HFpEF</h3>
+      <div class="card-meta">10 trials &middot; 14,437 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Sotagliflozin-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Sotagliflozin (Dual SGLT1/2i)</h3>
+      <div class="card-meta">11 trials &middot; 14,450 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Sotatercept-PAH-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Pulm Vascular" style="--card-accent:#14b8a6">
+      <div class="card-header"><span class="dot" style="background:#14b8a6"></span><span class="spec-label" style="color:#14b8a6">Pulm Vascular</span></div>
+      <h3>Sotatercept in PAH</h3>
+      <div class="card-meta">12 trials &middot; 14,450 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Sparsentan-IgAN-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Nephrology" style="--card-accent:#10b981">
+      <div class="card-header"><span class="dot" style="background:#10b981"></span><span class="spec-label" style="color:#10b981">Nephrology</span></div>
+      <h3>Sparsentan in IgA Nephropathy</h3>
+      <div class="card-meta">8 trials &middot; 14,163 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/TDXd-Breast-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Oncology" style="--card-accent:#f43f5e">
+      <div class="card-header"><span class="dot" style="background:#f43f5e"></span><span class="spec-label" style="color:#f43f5e">Oncology</span></div>
+      <h3>T-DXd in Breast Cancer</h3>
+      <div class="card-meta">14 trials &middot; 14,465 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Tezepelumab-Asthma-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Pulmonology" style="--card-accent:#06b6d4">
+      <div class="card-header"><span class="dot" style="background:#06b6d4"></span><span class="spec-label" style="color:#06b6d4">Pulmonology</span></div>
+      <h3>Tezepelumab in Severe Asthma</h3>
+      <div class="card-meta">13 trials &middot; 14,546 lines &middot; RR</div>
+      <div class="badges"><span class="badge badge-dr">DOSE-RESPONSE</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/Ticagrelor-Mono-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Ticagrelor Monotherapy Post-PCI</h3>
+      <div class="card-meta">13 trials &middot; 14,465 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Tirzepatide-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiometabolic" style="--card-accent:#f97316">
+      <div class="card-header"><span class="dot" style="background:#f97316"></span><span class="spec-label" style="color:#f97316">Cardiometabolic</span></div>
+      <h3>Tirzepatide CV/Obesity</h3>
+      <div class="card-meta">14 trials &middot; 14,489 lines &middot; RR</div>
+      <div class="badges"><span class="badge badge-dr">DOSE-RESPONSE</span> </div>
+    </a><a href="https://mahmood726-cyber.github.io/Tricuspid-TEER-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Interventional" style="--card-accent:#0ea5e9">
+      <div class="card-header"><span class="dot" style="background:#0ea5e9"></span><span class="spec-label" style="color:#0ea5e9">Interventional</span></div>
+      <h3>Tricuspid TEER</h3>
+      <div class="card-meta">8 trials &middot; 14,438 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/Vericiguat-LivingMeta/" target="_blank" rel="noopener" class="card" data-specialty="Cardiology" style="--card-accent:#3b82f6">
+      <div class="card-header"><span class="dot" style="background:#3b82f6"></span><span class="spec-label" style="color:#3b82f6">Cardiology</span></div>
+      <h3>Vericiguat in Heart Failure</h3>
+      <div class="card-meta">11 trials &middot; 14,434 lines &middot; HR</div>
+      <div class="badges"></div>
+    </a><a href="https://mahmood726-cyber.github.io/LivingMeta-Watchman-Amulet/" target="_blank" rel="noopener" class="card" data-specialty="Interventional" style="--card-accent:#0ea5e9">
+      <div class="card-header"><span class="dot" style="background:#0ea5e9"></span><span class="spec-label" style="color:#0ea5e9">Interventional</span></div>
+      <h3>Watchman FLX vs Amulet LAAO</h3>
+      <div class="card-meta">12 trials &middot; 14,462 lines &middot; RR</div>
+      <div class="badges"></div>
+    </a>
   </div>
-
-  <!-- Results info -->
-  <div class="results-info">
-    <strong id="resultsCount">32</strong>&nbsp;reviews shown
-    <div class="results-line"></div>
-  </div>
-
-  <!-- App grid -->
-  <div class="app-grid" id="appGrid"></div>
-
-</main>
-
-<!-- ─── FOOTER ──────────────────────────────────────────────────────────────── -->
-<footer class="site-footer">
-  <p>
-    <i class="fa-solid fa-atom"></i>&nbsp;
-    Mahmood Ahmad &mdash; Tahir Heart Institute &mdash;
-    <a href="https://mahmood726-cyber.github.io" target="_blank" rel="noopener">GitHub Portfolio</a>
-    &nbsp;&bull;&nbsp; Updated April 2026
-  </p>
-</footer>
-
+  <footer>
+    RapidMeta Living Evidence Portfolio &middot; v16.0 &middot; Updated 2026-04-10 &middot;
+    <a href="https://github.com/mahmood726-cyber" style="color:#3b82f6">GitHub</a>
+  </footer>
+</div>
 <script>
-/* ─── App data ──────────────────────────────────────────────────────────────── */
-const apps = [
-  {name:"PFA in AF", specialty:"Cardiology", trials:3, poolable:3, finding:"Non-inferior to thermal ablation", pages:"https://mahmood726-cyber.github.io/PFA-AF-LivingMeta/", local:"C:/Projects/PFA_AF_LivingMeta/PFA_AF_REVIEW.html"},
-  {name:"Watchman vs Amulet", specialty:"Cardiology", trials:6, poolable:2, finding:"SWISS-APERO favors Amulet", pages:"https://mahmood726-cyber.github.io/LivingMeta-Watchman-Amulet/", local:"C:/Projects/LivingMeta_Watchman_Amulet/WATCHMAN_AMULET_REVIEW.html"},
-  {name:"Tricuspid TEER", specialty:"Cardiology", trials:4, poolable:1, finding:"87% vs 5% TR reduction", pages:"https://mahmood726-cyber.github.io/Tricuspid-TEER-LivingMeta/", local:"C:/Projects/Tricuspid_TEER_LivingMeta/TRICUSPID_TEER_REVIEW.html"},
-  {name:"Inclisiran", specialty:"Cardiology", trials:4, poolable:3, finding:">50% LDL-C reduction", pages:"https://mahmood726-cyber.github.io/Inclisiran-LivingMeta/", local:"C:/Projects/Inclisiran_LivingMeta/INCLISIRAN_REVIEW.html"},
-  {name:"Tirzepatide CV/Obesity", specialty:"Cardiometabolic", trials:4, poolable:4, finding:"-20.9% weight, 91% response", pages:"https://mahmood726-cyber.github.io/Tirzepatide-LivingMeta/", local:"C:/Projects/Tirzepatide_LivingMeta/TIRZEPATIDE_CV_REVIEW.html"},
-  {name:"Semaglutide HFpEF", specialty:"Cardiology", trials:3, poolable:2, finding:"KCCQ improvement confirmed", pages:"https://mahmood726-cyber.github.io/Semaglutide-HFpEF-LivingMeta/", local:"C:/Projects/Semaglutide_HFpEF_LivingMeta/SEMAGLUTIDE_HFPEF_REVIEW.html"},
-  {name:"Leadless Pacing", specialty:"Cardiology", trials:6, poolable:1, finding:"HR 0.49 complications vs conv.", pages:"https://mahmood726-cyber.github.io/Leadless-Pacing-LivingMeta/", local:"C:/Projects/Leadless_Pacing_LivingMeta/LEADLESS_PACING_REVIEW.html"},
-  {name:"CSP vs CRT", specialty:"Cardiology", trials:5, poolable:2, finding:"Mixed: HOT-CRT+, PhysioSync−", pages:"https://mahmood726-cyber.github.io/CSP-LivingMeta/", local:"C:/Projects/CSP_LivingMeta/CSP_REVIEW.html"},
-  {name:"Coronary IVL", specialty:"Interventional", trials:6, poolable:0, finding:"92.4% success (evidence map)", pages:"https://mahmood726-cyber.github.io/Coronary-IVL-LivingMeta/", local:"C:/Projects/Coronary_IVL_LivingMeta/CORONARY_IVL_REVIEW.html"},
-  {name:"Omecamtiv Mecarbil", specialty:"Cardiology", trials:4, poolable:3, finding:"HR 0.92, modest benefit", pages:"https://mahmood726-cyber.github.io/Omecamtiv-LivingMeta/", local:"C:/Projects/Omecamtiv_LivingMeta/OMECAMTIV_REVIEW.html"},
-  {name:"CT-FFR", specialty:"Cardiology", trials:4, poolable:2, finding:"47% composite event reduction", pages:"https://mahmood726-cyber.github.io/CTFFR-LivingMeta/", local:"C:/Projects/CTFFR_LivingMeta/CTFFR_REVIEW.html"},
-  {name:"Vericiguat", specialty:"Cardiology", trials:3, poolable:3, finding:"HR 0.90 in HFrEF", pages:"https://mahmood726-cyber.github.io/Vericiguat-LivingMeta/", local:"C:/Projects/Vericiguat_LivingMeta/VERICIGUAT_REVIEW.html"},
-  {name:"Sotagliflozin", specialty:"Cardiology", trials:4, poolable:2, finding:"HR 0.74 / HR 0.67", pages:"https://mahmood726-cyber.github.io/Sotagliflozin-LivingMeta/", local:"C:/Projects/Sotagliflozin_LivingMeta/SOTAGLIFLOZIN_REVIEW.html"},
-  {name:"T-DXd Breast Cancer", specialty:"Oncology", trials:4, poolable:4, finding:"PFS HR 0.28–0.63", pages:"https://mahmood726-cyber.github.io/TDXd_Breast_LivingMeta/", local:"C:/Projects/TDXd_Breast_LivingMeta/TDXd_BREAST_REVIEW.html"},
-  {name:"Osimertinib NSCLC", specialty:"Oncology", trials:4, poolable:4, finding:"PFS HR 0.46, DFS HR 0.20", pages:"https://mahmood726-cyber.github.io/Osimertinib_NSCLC_LivingMeta/", local:"C:/Projects/Osimertinib_NSCLC_LivingMeta/OSIMERTINIB_NSCLC_REVIEW.html"},
-  {name:"Anti-Amyloid Alzheimers", specialty:"Neurology", trials:4, poolable:4, finding:"68–80% amyloid clearance", pages:"https://mahmood726-cyber.github.io/AntiAmyloid-AD-LivingMeta/", local:"C:/Projects/AntiAmyloid_AD_LivingMeta/ANTI_AMYLOID_AD_REVIEW.html"},
-  {name:"Resmetirom MASH", specialty:"Hepatology", trials:3, poolable:3, finding:"NASH resolution NNT ~5", pages:"https://mahmood726-cyber.github.io/Resmetirom-MASH-LivingMeta/", local:"C:/Projects/Resmetirom_MASH_LivingMeta/RESMETIROM_MASH_REVIEW.html"},
-  {name:"Sotatercept PAH", specialty:"Pulm Vascular", trials:3, poolable:3, finding:"Clinical worsening HR 0.16", pages:"https://mahmood726-cyber.github.io/Sotatercept_PAH_LivingMeta/", local:"C:/Projects/Sotatercept_PAH_LivingMeta/SOTATERCEPT_PAH_REVIEW.html"},
-  {name:"Icosapent Ethyl", specialty:"Cardiology", trials:3, poolable:3, finding:"REDUCE-IT vs STRENGTH debate", pages:"https://mahmood726-cyber.github.io/Icosapent_Ethyl_LivingMeta/", local:"C:/Projects/Icosapent_Ethyl_LivingMeta/ICOSAPENT_ETHYL_REVIEW.html"},
-  {name:"Semaglutide CKD", specialty:"Cardiology", trials:2, poolable:1, finding:"FLOW HR 0.76", pages:"https://mahmood726-cyber.github.io/Semaglutide_CKD_LivingMeta/", local:"C:/Projects/Semaglutide_CKD_LivingMeta/SEMAGLUTIDE_CKD_REVIEW.html"},
-  {name:"Ticagrelor Mono Post-PCI", specialty:"Interventional", trials:4, poolable:3, finding:"Bleeding HR 0.56, MACE neutral", pages:"https://mahmood726-cyber.github.io/Ticagrelor_Mono_LivingMeta/", local:"C:/Projects/Ticagrelor_Mono_LivingMeta/TICAGRELOR_MONO_REVIEW.html"},
-  {name:"DCB in PAD", specialty:"Peripheral Vascular", trials:6, poolable:5, finding:"Patency 65–82%, mortality debate", pages:"https://mahmood726-cyber.github.io/DCB_PAD_LivingMeta/", local:"C:/Projects/DCB_PAD_LivingMeta/DCB_PAD_REVIEW.html"},
-  {name:"Orforglipron", specialty:"Cardiometabolic", trials:8, poolable:0, finding:"-14.7% weight (Phase 2)", pages:"https://mahmood726-cyber.github.io/Orforglipron_LivingMeta/", local:"C:/Projects/Orforglipron_LivingMeta/ORFORGLIPRON_REVIEW.html"},
-  {name:"K+ Binders RAASi", specialty:"Cardiology", trials:6, poolable:3, finding:"DIAMOND: 84% MRA maintenance", pages:"https://mahmood726-cyber.github.io/K_Binders_LivingMeta/", local:"C:/Projects/K_Binders_LivingMeta/K_BINDERS_REVIEW.html"},
-  {name:"Empagliflozin Acute MI", specialty:"Cardiology", trials:3, poolable:2, finding:"EMPACT-MI HR 0.90 (NS)", pages:"https://mahmood726-cyber.github.io/Empa_MI_LivingMeta/", local:"C:/Projects/Empa_MI_LivingMeta/EMPA_MI_REVIEW.html"},
-  {name:"Obesity Pharmacotherapy NMA", specialty:"NMA", trials:5, poolable:5, finding:"Tirzepatide #1 by P-score", pages:"https://mahmood726-cyber.github.io/Obesity_NMA_LivingMeta/", local:"C:/Projects/Obesity_NMA_LivingMeta/OBESITY_NMA_REVIEW.html"},
-  {name:"Dupilumab COPD", specialty:"Pulmonology", trials:3, poolable:2, finding:"Exacerbation RR 0.70", pages:"https://mahmood726-cyber.github.io/Dupilumab_COPD_LivingMeta/", local:"C:/Projects/Dupilumab_COPD_LivingMeta/DUPILUMAB_COPD_REVIEW.html"},
-  {name:"Tezepelumab Asthma", specialty:"Pulmonology", trials:4, poolable:3, finding:"Exacerbation RR 0.44", pages:"https://mahmood726-cyber.github.io/Tezepelumab_Asthma_LivingMeta/", local:"C:/Projects/Tezepelumab_Asthma_LivingMeta/TEZEPELUMAB_ASTHMA_REVIEW.html"},
-  {name:"KRAS G12C NSCLC", specialty:"Oncology", trials:5, poolable:2, finding:"PFS HR 0.62", pages:"https://mahmood726-cyber.github.io/KRAS_G12C_LivingMeta/", local:"C:/Projects/KRAS_G12C_LivingMeta/KRAS_G12C_NSCLC_REVIEW.html"},
-  {name:"Sacituzumab Breast", specialty:"Oncology", trials:4, poolable:2, finding:"ASCENT PFS HR 0.41", pages:"https://mahmood726-cyber.github.io/Sacituzumab_TNBC_LivingMeta/", local:"C:/Projects/Sacituzumab_TNBC_LivingMeta/SACITUZUMAB_TNBC_REVIEW.html"},
-  {name:"Sparsentan IgAN", specialty:"Nephrology", trials:1, poolable:1, finding:"UP/C ratio 0.59", pages:"https://mahmood726-cyber.github.io/Sparsentan_IgAN_LivingMeta/", local:"C:/Projects/Sparsentan_IgAN_LivingMeta/SPARSENTAN_IGAN_REVIEW.html"},
-  {name:"Dapagliflozin Acute HF", specialty:"Cardiology", trials:3, poolable:2, finding:"DAPA ACT HR 0.90 (NS)", pages:"https://mahmood726-cyber.github.io/Dapa_AcuteHF_LivingMeta/", local:"C:/Projects/Dapa_AcuteHF_LivingMeta/DAPA_ACUTE_HF_REVIEW.html"},
-];
-
-/* ─── Specialty colour map ──────────────────────────────────────────────────── */
-const SPECIALTY_COLORS = {
-  "Cardiology":          "#3b82f6",
-  "Oncology":            "#f43f5e",
-  "Pulmonology":         "#06b6d4",
-  "Neurology":           "#8b5cf6",
-  "Hepatology":          "#f59e0b",
-  "Nephrology":          "#10b981",
-  "Cardiometabolic":     "#f97316",
-  "NMA":                 "#6366f1",
-  "Interventional":      "#0ea5e9",
-  "Peripheral Vascular": "#ec4899",
-  "Pulm Vascular":       "#14b8a6",
-};
-
-/* ─── Specialty icons ───────────────────────────────────────────────────────── */
-const SPECIALTY_ICONS = {
-  "Cardiology":          "fa-heart-pulse",
-  "Oncology":            "fa-ribbon",
-  "Pulmonology":         "fa-lungs",
-  "Neurology":           "fa-brain",
-  "Hepatology":          "fa-liver",
-  "Nephrology":          "fa-kidneys",
-  "Cardiometabolic":     "fa-weight-scale",
-  "NMA":                 "fa-diagram-project",
-  "Interventional":      "fa-syringe",
-  "Peripheral Vascular": "fa-droplet",
-  "Pulm Vascular":       "fa-wind",
-};
-
-/* ─── Build filter pills ────────────────────────────────────────────────────── */
-(function buildFilters() {
-  const bar = document.getElementById('filterBar');
-  const counts = {};
-  apps.forEach(a => { counts[a.specialty] = (counts[a.specialty] ?? 0) + 1; });
-
-  const filters = [
-    { label: 'All', key: 'all', count: apps.length },
-    ...Object.keys(SPECIALTY_COLORS).map(s => ({ label: s, key: s, count: counts[s] ?? 0 })).filter(f => f.count > 0)
-  ];
-
-  filters.forEach(f => {
-    const pill = document.createElement('button');
-    pill.className = 'pill' + (f.key === 'all' ? ' active' : '');
-    pill.dataset.filter = f.key;
-    pill.setAttribute('aria-pressed', f.key === 'all' ? 'true' : 'false');
-    const icon = f.key === 'all' ? 'fa-table-cells' : (SPECIALTY_ICONS[f.key] ?? 'fa-circle');
-    pill.innerHTML = `<i class="fa-solid ${icon}"></i> ${f.label} <span class="pill-count">${f.count}</span>`;
-    if (f.key !== 'all') {
-      pill.style.setProperty('--pill-accent', SPECIALTY_COLORS[f.key]);
-    }
-    pill.addEventListener('click', () => setFilter(f.key));
-    bar.appendChild(pill);
+function filterCards(btn) {
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const filter = btn.dataset.filter;
+  document.querySelectorAll('.card').forEach(c => {
+    if (filter === 'all' || c.dataset.specialty === filter) c.classList.remove('hidden');
+    else c.classList.add('hidden');
   });
-})();
-
-/* ─── Filter state ──────────────────────────────────────────────────────────── */
-let currentFilter = 'all';
-
-function setFilter(key) {
-  currentFilter = key;
-  document.querySelectorAll('#filterBar .pill').forEach(p => {
-    const active = p.dataset.filter === key;
-    p.classList.toggle('active', active);
-    p.setAttribute('aria-pressed', String(active));
-  });
-  renderCards();
 }
-
-/* ─── Render cards ──────────────────────────────────────────────────────────── */
-function renderCards() {
-  const grid = document.getElementById('appGrid');
-  const count = document.getElementById('resultsCount');
-  const filtered = currentFilter === 'all'
-    ? apps
-    : apps.filter(a => a.specialty === currentFilter);
-
-  count.textContent = filtered.length;
-  grid.innerHTML = '';
-
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-circle-xmark"></i><p>No reviews in this category yet.</p></div>`;
-    return;
-  }
-
-  filtered.forEach((app, idx) => {
-    const color = SPECIALTY_COLORS[app.specialty] ?? '#3b82f6';
-    const icon  = SPECIALTY_ICONS[app.specialty] ?? 'fa-circle';
-
-    const card = document.createElement('div');
-    card.className = 'app-card';
-    card.dataset.specialty = app.specialty;
-    card.style.animationDelay = `${idx * 30}ms`;
-
-    const localUrl = 'file:///' + app.local.replace(/\\/g, '/');
-
-    card.innerHTML = `
-      <div class="card-body">
-        <div class="card-top">
-          <h2 class="card-title">${escHtml(app.name)}</h2>
-          <span class="specialty-badge" style="background:${color};">
-            <i class="fa-solid ${icon}" style="margin-right:4px;font-size:0.65rem;"></i>${escHtml(app.specialty)}
-          </span>
-        </div>
-        <p class="card-finding">
-          <i class="fa-solid fa-quote-left" style="opacity:0.3;font-size:0.7rem;margin-right:4px;"></i>${escHtml(app.finding)}
-        </p>
-        <div class="card-meta">
-          <span class="meta-item">
-            <i class="fa-solid fa-flask-vial"></i>
-            <span class="meta-highlight">${app.trials}</span>&nbsp;trials
-          </span>
-          <span class="meta-item">
-            <i class="fa-solid fa-calculator"></i>
-            <span class="meta-highlight">${app.poolable}</span>&nbsp;poolable
-          </span>
-          ${app.poolable === 0
-            ? `<span class="meta-item" style="color:#f59e0b;"><i class="fa-solid fa-map"></i> Evidence map</span>`
-            : ''}
-        </div>
-      </div>
-      <div class="card-footer">
-        <a class="btn btn-primary" href="${escAttr(app.pages)}" target="_blank" rel="noopener">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Open
-        </a>
-        <a class="btn btn-secondary" href="${escAttr(localUrl)}" title="Open local file">
-          <i class="fa-solid fa-folder-open"></i> Local
-        </a>
-      </div>
-    `;
-
-    grid.appendChild(card);
-  });
-
-  /* Intersection observer for fade-in */
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  grid.querySelectorAll('.app-card').forEach(c => obs.observe(c));
-}
-
-/* ─── HTML escaping helpers ─────────────────────────────────────────────────── */
-function escHtml(s) {
-  return String(s)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
-function escAttr(s) { return escHtml(s); }
-
-/* ─── Initial render ────────────────────────────────────────────────────────── */
-renderCards();
 </script>
 </body>
 </html>
